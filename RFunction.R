@@ -38,22 +38,22 @@ rFunction <-  function(data) {
   )
   udunt <- udunits_from_proj[[unt]]
   unts <- as_units(paste0(udunt,"/s"), check_is_valid = FALSE)
-    data$speed <- set_units(unlist(lapply(speed(data), function(x) c(as.vector(x), NA))), unts, mode = "standard")
+    data$distance <- set_units(unlist(lapply(distance(data), function(x) c(as.vector(x), NA))), unts, mode = "standard")
     
     if(length(levels(trackId(data)))==1){
-      dataDF <- data.frame(speed=data$speed,indv=namesIndiv(data))
-      speedHist <- ggplot(dataDF, aes(as.numeric(speed)))+geom_histogram(bins=100)+facet_grid(~indv)+ xlab(paste0("Speed ",paste0("(",udunt,"/s)")))+theme_bw()
+      dataDF <- data.frame(distance=data$distance,indv=namesIndiv(data))
+      distanceHist <- ggplot(dataDF, aes(as.numeric(distance)))+geom_histogram(bins=100)+facet_grid(~indv)+ xlab(paste0("Distance ",paste0("(",udunt,"/s)")))+theme_bw()
       pdf(paste0(Sys.getenv(x = "APP_ARTIFACTS_DIR", "/tmp/"), "distance_histogram.pdf"))
-      print(speedHist)
+      print(distanceHist)
       dev.off()
     } else {
     pdf(paste0(Sys.getenv(x = "APP_ARTIFACTS_DIR", "/tmp/"), "distance_histogram.pdf"))
-    speedHistAll <- ggplot(data@data, aes(as.numeric(speed)))+geom_histogram(bins=100)+ xlab(paste0("Speed ",paste0("(",udunt,"/s)")))+ggtitle("All Individuals") +theme_bw()
-    print(speedHistAll)
+    distanceHistAll <- ggplot(data@data, aes(as.numeric(distance)))+geom_histogram(bins=100)+ xlab(paste0("Distance ",paste0("(",udunt,"/s)")))+ggtitle("All Individuals") +theme_bw()
+    print(distanceHistAll)
     lapply(split(data), function(x){
-      dataDF <- data.frame(speed=x$speed, indv=namesIndiv(x)) 
-      speedHist <- ggplot(dataDF, aes(as.numeric(speed)))+geom_histogram(bins=100)+facet_grid(~indv)+ xlab(paste0("Speed ",paste0("(",udunt,"/s)")))+theme_bw()
-      print(speedHist)
+      dataDF <- data.frame(distance=x$distance, indv=namesIndiv(x)) 
+      distanceHist <- ggplot(dataDF, aes(as.numeric(distance)))+geom_histogram(bins=100)+facet_grid(~indv)+ xlab(paste0("Distance ",paste0("(",udunt,"/s)")))+theme_bw()
+      print(distanceHist)
     })
     dev.off() 
     
