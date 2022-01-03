@@ -12,12 +12,9 @@ This App calculates distance between each consecutive locations. This measuremen
 
 If the coordinates are geographic (i.e.long/lat) distance is calculated on a sphere using the ellipsoid, for other projections the calculation is done on a plane using Pythagoras.
 
-**Units**: map units. If the coordinates are geographic (i.e.long/lat) all values are returned in "meters", otherwise in the "map units" of the current projection.
+A column named _**distance**_ will be appended to the dataset that is returned for further use in next Apps. This column also contains the **unit** information in which the distance was calculated. If the coordinates are geographic (i.e.long/lat) all values are returned in "meters", otherwise in the "map units" of the current projection.
 
-A histogram of the distance distribution of all individuals and per individual is automatically created and can be downloaded in the output as a pdf.
-
-A column named _**distance**_ will be appended to the dataset that is returned for further use in next Apps.
-
+A histogram of the distance distribution of all individuals and per individual is automatically created and can be downloaded in the output as a pdf. For the histogram the units can be customized for better visualization and/or understanding of the data.
 
 ### Input data
 moveStack in Movebank format
@@ -29,9 +26,15 @@ moveStack in Movebank format
 `distance_histogram.pdf`: PDF with histograms of the distances per individual
 
 ### Parameters
-no parameters
+`units`: units displayed in the histogram can be selected. Available are: `centimeters`, `meters`, `kilometers`, `inches`, `feet`, `yards` & `miles`. Default is the *map unit* of the data (see documentation). 
 
 ### Null or error handling
 **Data**: The full input dataset with the addition of distance is returned for further use in a next App and cannot be empty.
 
-**Units**: If the projection does not have defined units, a warning message will be issued
+**Units**: 
+
+  - If the projection does not have defined units, a warning message will be issued.
+  
+  - If *map units* are: "link", "us_in", "ind_yd", "ind_ft", "ind_ch" or not defined, there is no conversion available to display other units in the histogram. Example error message: `Error: cannot convert us_in into km`
+
+

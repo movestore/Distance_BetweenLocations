@@ -2,10 +2,11 @@ library('move')
 library("ggplot2")
 library("sf")
 library("units")
+library("ggforce") # to be able to use unit class in ggplot
 
 ## add in readme: "To check your projection go to:.... " in documentation when this is possible
 
-rFunction <-  function(data) {
+rFunction <-  function(data, unitsPLOT=NULL) { 
     if(st_crs(crs(data))$IsGeographic){ ## using pkg units so units are kept for the future
       unt <- "m" ## latlong result is in m/s
     }else{
@@ -37,22 +38,22 @@ rFunction <-  function(data) {
     `ind-ch` = "ind_ch"
   )
   udunt <- udunits_from_proj[[unt]]
-  unts <- as_units(paste0(udunt,"/s"), check_is_valid = FALSE)
+  unts <- as_units(udunt, check_is_valid = FALSE)
     data$distance <- set_units(unlist(lapply(distance(data), function(x) c(as.vector(x), NA))), unts, mode = "standard")
     
     if(length(levels(trackId(data)))==1){
       dataDF <- data.frame(distance=data$distance,indv=namesIndiv(data))
-      distanceHist <- ggplot(dataDF, aes(as.numeric(distance)))+geom_histogram(bins=100)+facet_grid(~indv)+ xlab(paste0("Distance ",paste0("(",udunt,"/s)")))+theme_bw()
+      distanceHist <- ggplot(dataDF, aes(distance))+geom_histogram(bins=100)+facet_grid(~indv)+ xlab("Distance")+theme_bw()+ scale_x_unit(unit = unitsPLOT)
       pdf(paste0(Sys.getenv(x = "APP_ARTIFACTS_DIR", "/tmp/"), "distance_histogram.pdf"))
       print(distanceHist)
       dev.off()
     } else {
     pdf(paste0(Sys.getenv(x = "APP_ARTIFACTS_DIR", "/tmp/"), "distance_histogram.pdf"))
-    distanceHistAll <- ggplot(data@data, aes(as.numeric(distance)))+geom_histogram(bins=100)+ xlab(paste0("Distance ",paste0("(",udunt,"/s)")))+ggtitle("All Individuals") +theme_bw()
+    distanceHistAll <- ggplot(data@data, aes(distance))+geom_histogram(bins=100)+ xlab("Distance")+ggtitle("All Individuals")+ theme_bw()+ scale_x_unit(unit = unitsPLOT)
     print(distanceHistAll)
     lapply(split(data), function(x){
       dataDF <- data.frame(distance=x$distance, indv=namesIndiv(x)) 
-      distanceHist <- ggplot(dataDF, aes(as.numeric(distance)))+geom_histogram(bins=100)+facet_grid(~indv)+ xlab(paste0("Distance ",paste0("(",udunt,"/s)")))+theme_bw()
+      distanceHist <- ggplot(dataDF, aes(distance))+geom_histogram(bins=100)+facet_grid(~indv)+ xlab("Distance")+theme_bw() + scale_x_unit(unit = unitsPLOT)
       print(distanceHist)
     })
     dev.off() 

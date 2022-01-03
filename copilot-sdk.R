@@ -19,7 +19,7 @@ args <- list()
 #    args[["password"]] = "any-password"
 
 # Add your arguments of your r function here
-# args[["plot"]] = TRUE
+args[["unitsPLOT"]] = "km"
 
 #################################################################
 #################################################################

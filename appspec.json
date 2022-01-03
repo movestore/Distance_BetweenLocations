@@ -1,5 +1,45 @@
 {
-  "settings":[],
+  "settings":[
+    {
+  "id": "unitsPLOT",
+  "name": "Select units for plot",
+  "description": "Choose units to be displayed in the summary histograms, sometimes changing to another unit helps better visualization and/or understanding the data.",
+  "type": "DROPDOWN",
+  "defaultValue": null,
+  "options": [{
+      "value": null,
+      "displayText": "Map unit of data"
+    },
+    {
+      "value": "cm",
+      "displayText": "Centimeters"
+    },
+    {
+      "value": "m",
+      "displayText": "Meters"
+    },
+    {
+      "value": "km",
+      "displayText": "Kilometers"
+    },
+    {
+      "value": "in",
+      "displayText": "Inches"
+    },
+    {
+      "value": "ft",
+      "displayText": "Feet"
+    },
+    {
+      "value": "yd",
+      "displayText": "Yards"
+    },
+    {
+      "value": "mi",
+      "displayText": "Miles"
+    }]
+  }
+],
   "dependencies": {
     "R": [
       {
@@ -13,6 +53,9 @@
       },
       {
         "name": "units"
+      },
+      {
+        "name": "ggforce"
       }
     ]
   },
