@@ -25,6 +25,8 @@ moveStack in Movebank format
 ### Artefacts
 `distance_histogram.pdf`: PDF with histograms of the distances per individual
 
+`distanceBetweenLocations.csv`: table containing the timestamps, longitude, latitude, individual Id and calculated distance between locations. The column name of the distance contains the unit information after the underscore, e.g "distance_m". The units correspond to the map units of the data (see documentation).
+
 ### Parameters
 `units`: units displayed in the histogram can be selected. Available are: `centimeters`, `meters`, `kilometers`, `inches`, `feet`, `yards` & `miles`. Default is the *map unit* of the data (see documentation). 
 

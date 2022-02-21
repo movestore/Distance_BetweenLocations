@@ -47,6 +47,10 @@ rFunction <-  function(data, unitsPLOT=NULL) {
       pdf(paste0(Sys.getenv(x = "APP_ARTIFACTS_DIR", "/tmp/"), "distance_histogram.pdf"))
       print(distanceHist)
       dev.off()
+      
+      outDF <- data.frame(timestamps=timestamps(data),location.long=coordinates(data)[,1],location.lat=coordinates(data)[,2], individual.local.identifier=data@trackId, distance=data$distance)
+      colnames(outDF)[5] <- paste0(colnames(outDF)[5],"_",udunt)
+      write.csv(outDF, row.names=F, file = paste0(Sys.getenv(x = "APP_ARTIFACTS_DIR", "/tmp/"),"distanceBetweenLocations.csv"))
     } else {
     pdf(paste0(Sys.getenv(x = "APP_ARTIFACTS_DIR", "/tmp/"), "distance_histogram.pdf"))
     distanceHistAll <- ggplot(data@data, aes(distance))+geom_histogram(bins=100)+ xlab("Distance")+ggtitle("All Individuals")+ theme_bw()+ scale_x_unit(unit = unitsPLOT)
@@ -58,6 +62,9 @@ rFunction <-  function(data, unitsPLOT=NULL) {
     })
     dev.off() 
     
+    outDF <- data.frame(timestamps=timestamps(data),location.long=coordinates(data)[,1],location.lat=coordinates(data)[,2], individual.local.identifier=data@trackId, distance=data$distance)
+    colnames(outDF)[5] <- paste0(colnames(outDF)[5],"_",udunt)
+    write.csv(outDF, row.names=F, file = paste0(Sys.getenv(x = "APP_ARTIFACTS_DIR", "/tmp/"),"distanceBetweenLocations.csv"))
   }
   return(data)
 }
