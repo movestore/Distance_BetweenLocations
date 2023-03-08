@@ -27,8 +27,8 @@ moveStack in Movebank format
 
 `distanceBetweenLocations.csv`: table containing the timestamps, longitude, latitude, individual Id and calculated distance between locations. The column name of the distance contains the unit information after the underscore, e.g "distance_m". The units correspond to the map units of the data (see documentation).
 
-### Parameters
-`units`: units displayed in the histogram can be selected. Available are: `centimeters`, `meters`, `kilometers`, `inches`, `feet`, `yards` & `miles`. Default is the *map unit* of the data (see documentation). 
+### Settings
+**Select units for plot (`units`):** units displayed in the histogram can be selected. Available are: `centimeters`, `meters`, `kilometers`, `inches`, `feet`, `yards` & `miles`. Default is the *map unit* of the data (see documentation). 
 
 ### Null or error handling
 **Data**: The full input dataset with the addition of distance is returned for further use in a next App and cannot be empty.
