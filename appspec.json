@@ -1,15 +1,12 @@
 {
   "settings":[
     {
-  "id": "unitsPLOT",
-  "name": "Select units for plot",
-  "description": "Choose units to be displayed in the summary histograms, sometimes changing to another unit helps better visualization and/or understanding the data.",
+  "id": "units",
+  "name": "Units",
+  "description": "Choose the units the distance should be returned in. Default is meters.",
   "type": "DROPDOWN",
-  "defaultValue": null,
-  "options": [{
-      "value": null,
-      "displayText": "Map unit of data"
-    },
+  "defaultValue": "m",
+  "options": [
     {
       "value": "cm",
       "displayText": "Centimeters"
@@ -21,29 +18,13 @@
     {
       "value": "km",
       "displayText": "Kilometers"
-    },
-    {
-      "value": "in",
-      "displayText": "Inches"
-    },
-    {
-      "value": "ft",
-      "displayText": "Feet"
-    },
-    {
-      "value": "yd",
-      "displayText": "Yards"
-    },
-    {
-      "value": "mi",
-      "displayText": "Miles"
     }]
   }
 ],
   "dependencies": {
     "R": [
       {
-        "name": "move"
+        "name": "move2"
       },
       {
         "name": "ggplot2"
@@ -53,9 +34,6 @@
       },
       {
         "name": "units"
-      },
-      {
-        "name": "ggforce"
       }
     ]
   },
@@ -81,13 +59,6 @@
       "affiliationRor": "https://ror.org/026stee22"
     }
   ],
-  "references":[
-  {
-    "type": "HasPart",
-    "note": "Pebesma, E., 2018. Simple Features for R: Standardized Support for Spatial Vector Data. The R Journal 10 (1), 439-446",
-    "url": "https://doi.org/10.32614/RJ-2018-009"
-  }
- ],
   "documentation" : {
     "url": "https://github.com/movestore/Distance_BetweenLocations/blob/master/README.md"
   }
